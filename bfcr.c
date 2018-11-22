@@ -8,44 +8,65 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
 typedef struct{
-    char comp;
+    char comp[2];
     char nome[21];
 }crianca;
 
+void swapElements(int *inputArray, int index1, int index2){
+    int temporary = inputArray[index1];
+    inputArray[index1] = inputArray[index2];
+    inputArray[index2] = temporary;
+}
+
+int particao(int *inputArray, int low, int high)
+{
+    int eixo = inputArray[high];
+    int i = low - 1;
+    for (int j = low; j <= high - 1; j++)
+    {
+        if (inputArray[j] <= eixo)
+        {
+            i++;
+            swapElements(inputArray, i, j);
+        }
+    }
+    swapElements(inputArray, i + 1, high);
+    return (i + 1);
+}
+
+void quickSort(int *inputArray, int low, int high)
+{
+    if (low < high)
+    {
+        int indexP = particao(inputArray, low, high);
+        quickSort(inputArray, low, indexP - 1);
+        quickSort(inputArray, indexP + 1, high);
+    }
+}
+
+
 int main() {
-    int n,i=0,j=0;
+    int n,i=0,good=0,evil=0;
     scanf("%d",&n);
     crianca c[n];
-    char entrada[23], ch = '\0';
-    while (i<n){
-        do{
-            scanf("%c",&ch);
-            if (ch=='\0')
-                break;
-            entrada[j]=ch;
-            j++;
-        }while(1);
-        if (j<23){
-            while (j<23){
-                entrada[j]='\0';
-                j++;
-            }
-        }
-        j=0;
-        c[i].comp=entrada[0];
-        while(j<21){
-            c[i].nome[j]=entrada[2+j];
-            j++;
-        }
-        j=0;
-        i++;
-    }
-    i=0;
-    while (i<n){
-        printf("%c %s",c[i].comp,c[i].nome);
-        i++;
+    char sinalBon[]="+";
+   // char entrada[23], ch = '\0';
+    for (i=0; i<n; i++)
+    {
+        scanf("%s%s",c[i].comp,c[i].nome);
+        if (c[i].comp[0] == '+')
+            good++;
+        else
+            evil++;
     }
     
+    for (i=0; i<n; i++)
+    {
+        printf("%s%s\n",c[i].comp,c[i].nome);
+    }
+    printf("\nSe comportaram: %d | Nao se comportaram: %d", good, evil);
     return 0;
 }
