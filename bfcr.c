@@ -3,6 +3,7 @@
 //  listaNatal2018
 //
 //  Created by Bernardo Russo on 19/11/18.
+// Com agradecimentos a Otacilio Maia
 //  Copyright © 2018 Bernardo Russo. All rights reserved.
 //
 
