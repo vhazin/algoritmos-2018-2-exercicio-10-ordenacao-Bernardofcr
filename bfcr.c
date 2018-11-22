@@ -65,6 +65,6 @@ int main() {
     {
         printf("%s\n",c[i].nome);
     }
-    printf("Se comportaram: %d | Nao se comportaram: %d", good, evil);
+    printf("Se comportaram: %d | Nao se comportaram: %d\n", good, evil);
     return 0;
 }
