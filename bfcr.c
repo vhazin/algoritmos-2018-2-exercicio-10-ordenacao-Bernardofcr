@@ -15,29 +15,29 @@ typedef struct{
     char nome[21];
 }crianca;
 
-void swapElements(int *inputArray, int index1, int index2){
-    int temporary = inputArray[index1];
+void swapElements(crianca *inputArray, int index1, int index2){
+    crianca temporary = inputArray[index1];
     inputArray[index1] = inputArray[index2];
     inputArray[index2] = temporary;
 }
 
-int particao(int *inputArray, int low, int high)
+int particao(crianca *criancaM, int low, int high)
 {
-    int eixo = inputArray[high];
+    char *eixo = criancaM[high].nome;
     int i = low - 1;
     for (int j = low; j <= high - 1; j++)
     {
-        if (inputArray[j] <= eixo)
+        if (strcmp(criancaM[j].nome, eixo)<=0)
         {
             i++;
-            swapElements(inputArray, i, j);
+            swapElements(criancaM, i, j);
         }
     }
-    swapElements(inputArray, i + 1, high);
+    swapElements(criancaM, i + 1, high);
     return (i + 1);
 }
 
-void quickSort(int *inputArray, int low, int high)
+void quickSort(crianca *inputArray, int low, int high)
 {
     if (low < high)
     {
@@ -52,8 +52,6 @@ int main() {
     int n,i=0,good=0,evil=0;
     scanf("%d",&n);
     crianca c[n];
-    char sinalBon[]="+";
-   // char entrada[23], ch = '\0';
     for (i=0; i<n; i++)
     {
         scanf("%s%s",c[i].comp,c[i].nome);
@@ -62,11 +60,11 @@ int main() {
         else
             evil++;
     }
-    
+    quickSort(c,0,n-1);
     for (i=0; i<n; i++)
     {
-        printf("%s%s\n",c[i].comp,c[i].nome);
+        printf("%s\n",c[i].nome);
     }
-    printf("\nSe comportaram: %d | Nao se comportaram: %d", good, evil);
+    printf("Se comportaram: %d | Nao se comportaram: %d", good, evil);
     return 0;
 }
